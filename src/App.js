@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getCharities, getPayments } from './store/actions';
-import { getCharitiesState, getMessageState, getDonateState } from './store/selectors';
+import { getCharityList, getMessageState, getDonateState } from './store/selectors';
 import { payments } from './static';
 
 const Card = styled.div`
@@ -21,7 +21,7 @@ const style = {
 const App = () => {
   const dispatch = useDispatch();
 
-  const charities = useSelector(getCharitiesState);
+  const charities = useSelector(getCharityList);
   const message = useSelector(getMessageState);
   const donate = useSelector(getDonateState);
 
