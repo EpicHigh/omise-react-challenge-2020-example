@@ -10,20 +10,20 @@ const Card = styled.div`
   border: 1px solid #ccc;
 `;
 
+const style = {
+  color: 'red',
+  margin: '1em 0',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  textAlign: 'center',
+};
+
 const App = () => {
   const dispatch = useDispatch();
 
   const charities = useSelector(getCharitiesState);
   const message = useSelector(getMessageState);
   const donate = useSelector(getDonateState);
-
-  const style = {
-    color: 'red',
-    margin: '1em 0',
-    fontWeight: 'bold',
-    fontSize: '16px',
-    textAlign: 'center',
-  };
 
   useEffect(() => {
     dispatch(getCharities());
@@ -35,10 +35,10 @@ const App = () => {
       <h1>Tamboon React</h1>
       <p>All donations: {donate}</p>
       <p style={style}>{message.error}</p>
-      {charities.map((charity, i) => (
+      {charities?.map((charity, i) => (
         <Card key={`${i}`}>
           <p>{charity?.name}</p>
-          {payments.map((amount, j) => (
+          {payments?.map((amount, j) => (
             <label key={`${j}`}>
               <input type="radio" name={`${amount}-payment-${j}`} />
               {amount}
