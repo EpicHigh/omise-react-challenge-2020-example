@@ -1,9 +1,10 @@
 import fetch from 'isomorphic-fetch';
+import { summaryDonations } from '../../helpers';
 import { getErrorMessage, getSuccessMessage, resetSuccessMessage, resetErrorMessage } from './message.action';
 import { updateTotalDonate } from './donate.action';
 
 export function getPayments() {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       const response = await fetch('http://localhost:3001/payments');
       if (response.status >= 200 && response.status < 300) {
@@ -12,6 +13,7 @@ export function getPayments() {
           type: 'TAMBOON/GET_PAYMENTS',
           payload: data,
         });
+        dispatch(updateTotalDonate(summaryDonations(data.map((item) => item?.amount || 0))));
       } else {
         throw new Error('Cannot receive a payment data');
       }
