@@ -66,9 +66,7 @@ const App = () => {
                   type="radio"
                   onClick={() => setSelectedAmount(amount)}
                 />
-                <label key={`label-${j}`} htmlFor={`${amount}-payment-${i}${j}`}>
-                  {amount}
-                </label>
+                <label htmlFor={`${amount}-payment-${i}${j}`}>{amount}</label>
               </div>
             ))}
             <button type="submit" onClick={handlePayments(charity.id, selectedAmount, charity.currency)}>
