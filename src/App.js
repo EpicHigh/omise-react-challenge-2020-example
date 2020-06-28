@@ -1,24 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getCharities, getPayments } from './store/actions';
+import { getCharities, getPayments, makePayments } from './store/actions';
 import { getCharityList, getMessageState, getDonateState } from './store/selectors';
 import { payments } from './static';
 
 const Card = styled.div`
-  margin: 10px;
   border: 1px solid #ccc;
+  margin: 10px;
 `;
 
-const style = {
-  color: 'red',
-  margin: '1em 0',
-  fontWeight: 'bold',
-  fontSize: '16px',
-  textAlign: 'center',
-};
+const Box = styled.div`
+  display: flex;
+`;
+
+const Success = styled.p`
+  color: green;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 1em 0;
+  text-align: center;
+`;
+
+const Error = styled.p`
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 1em 0;
+  text-align: center;
+`;
 
 const App = () => {
+  const [selectedAmount, setSelectedAmount] = useState(10);
   const dispatch = useDispatch();
 
   const charities = useSelector(getCharityList);
@@ -30,21 +43,38 @@ const App = () => {
     dispatch(getPayments());
   }, [dispatch]);
 
+  const handlePayments = useCallback(
+    (charitiesId, amount, currency) => () => dispatch(makePayments(charitiesId, amount, currency)),
+    [dispatch],
+  );
+
   return (
     <div>
       <h1>Tamboon React</h1>
       <p>All donations: {donate}</p>
-      <p style={style}>{message.error}</p>
+      {message.success && <Success>{message.success}</Success>}
+      {message.error && <Error>{message.error}</Error>}
       {charities?.map((charity, i) => (
         <Card key={`${i}`}>
           <p>{charity?.name}</p>
-          {payments?.map((amount, j) => (
-            <label key={`${j}`}>
-              <input type="radio" name={`${amount}-payment-${j}`} />
-              {amount}
-            </label>
-          ))}
-          <button>Pay</button>
+          <Box>
+            {payments?.map((amount, j) => (
+              <div key={`payment-${j}`}>
+                <input
+                  id={`${amount}-payment-${i}${j}`}
+                  name="payment"
+                  type="radio"
+                  onClick={() => setSelectedAmount(amount)}
+                />
+                <label key={`label-${j}`} htmlFor={`${amount}-payment-${i}${j}`}>
+                  {amount}
+                </label>
+              </div>
+            ))}
+            <button type="submit" onClick={handlePayments(charity.id, selectedAmount, charity.currency)}>
+              Pay
+            </button>
+          </Box>
         </Card>
       ))}
     </div>
