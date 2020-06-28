@@ -4,8 +4,11 @@
     "browser": true,
     "node": true
   },
-  "plugins": [
-    "react"
+  "plugins": ["react", "react-hooks", "prettier", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "rules": {
     "quotes": [2, "single"],
@@ -20,7 +23,6 @@
     "no-param-reassign": 2,
     "prefer-arrow-callback": 0,
     "arrow-spacing": 1,
-    "indent": ["error", 2, {"SwitchCase": 1}],
     "space-before-blocks": 1,
     "keyword-spacing": 1,
     "comma-dangle": [1, "always-multiline"],
@@ -30,6 +32,26 @@
     "no-use-before-define": [1, "nofunc"],
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
-    "react/react-in-jsx-scope": 1
+    "react/react-in-jsx-scope": 1,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "prettier/prettier": "error",
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external", "internal", "unknown"], "parent", ["sibling", "index"]],
+        "newlines-between": "never"
+      }
+    ]
   }
 }
