@@ -14,6 +14,6 @@ export function resetSuccessMessage() {
   return { type: 'TAMBOON/RESET_SUCCESS_MESSAGE' };
 }
 
-export function resetToastState() {
+export function resetMessageState() {
   return { type: 'TAMBOON/RESET_MESSAGE_STATE' };
 }
