@@ -4,7 +4,7 @@
     "browser": true,
     "node": true
   },
-  "plugins": ["react", "react-hooks", "prettier", "import"],
+  "plugins": ["react", "react-hooks", "prettier", "import", "better-styled-components"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -36,6 +36,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": "error",
+    "better-styled-components/sort-declarations-alphabetically": 2,
     "import/extensions": [
       "error",
       "always",
@@ -51,6 +52,14 @@
       {
         "groups": [["builtin", "external", "internal", "unknown"], "parent", ["sibling", "index"]],
         "newlines-between": "never"
+      }
+    ],
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "reservedFirst": true,
+        "shorthandFirst": true
       }
     ]
   }
