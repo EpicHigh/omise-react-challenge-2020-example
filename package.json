@@ -22,11 +22,11 @@
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "7.16.5",
+    "@babel/core": "7.25.9",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
-    "@babel/plugin-transform-runtime": "7.16.5",
-    "@babel/preset-env": "7.16.5",
-    "@babel/preset-react": "7.16.5",
+    "@babel/plugin-transform-runtime": "7.25.9",
+    "@babel/preset-env": "7.25.9",
+    "@babel/preset-react": "7.25.9",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.3",
     "eslint": "7.32.0",
